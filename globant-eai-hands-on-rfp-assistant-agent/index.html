@@ -1,0 +1,414 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>Globant EAI Hands-On - RFP Assistant Agent</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://storage.googleapis.com/claat-public/codelab-elements.css">
+  <style>
+    .success {
+      color: #1e8e3e;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <google-codelab-analytics gaid="UA-49880327-14"></google-codelab-analytics>
+  <google-codelab codelab-gaid=""
+                  id="globant-eai-hands-on-rfp-assistant-agent"
+                  title="Globant EAI Hands-On - RFP Assistant Agent"
+                  environment="web"
+                  feedback-link="">
+    
+      <google-codelab-step label="Introduction" duration="0">
+        <h2 is-upgraded>Context</h2>
+<p>You received a RFP via email and you need to send some questions to the clients in 3 days. Then you have to send the proposal in 1 week.</p>
+<h2 is-upgraded>Challenge</h2>
+<p>We have very short period of time to face the RFP and so much to do.</p>
+<h2 is-upgraded>Approach</h2>
+<p>Create an initial draft solution based on the conversation with enough detail to create the scope and estimation.</p>
+<p>Leverage Globant Enterprise AI Assistants to meet this deadline.</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Task 1 - Create an Studio Knowledge Assistant" duration="0">
+        <h2 is-upgraded>Create an Studio Knowledge Assistant</h2>
+<p><strong>Objective</strong>: Create an assistant capable of answering questions about your Studio</p>
+<ol type="1" start="1">
+<li>Access <a href="https://console.saia.ai/" target="_blank">https://console.saia.ai/</a> using your Globant credentials.</li>
+<li>In the left navigation menu, click the <strong>RAG Assistants</strong> item.  </li>
+<li>Next, click the <strong>CREATE NEW</strong> button located in the bottom-left corner.</li>
+<li>A pop-up window will appear. Enter &#39;<strong>AI Studio</strong>&#39; as the RAG Assistant name, add a description, choose ‘RAG Assistant Default&#39; in <strong>Based on</strong> option, and click the <strong>CONFIRM </strong>button.</li>
+<li>Before uploading the documents to the Assistant, make sure you download them to your computer from this <a href="https://drive.google.com/drive/folders/1kHxLzfDsby1wYbkSxIuyW1G4xjLcW2Ul" target="_blank">drive</a>.</li>
+<li>Then, click the <strong>+ ADD DOCUMENTS </strong>button.</li>
+<li>On the &#39;Search and Chat: Default Profile&#39; page, click the <strong>+ Add Files...</strong> button to upload the files from yout computer from one particular offering </li>
+<li>Once completed, press the <strong>START UPLOAD</strong> button</li>
+</ol>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Task 2 - Create a Storyteller Assistant" duration="0">
+        <h2 is-upgraded>Create a Storyteller Assistant </h2>
+<p><strong>Objective</strong>: Create an assistant capable of building a presentation with a compelling Globant Way storytelling approach.</p>
+<ol type="1" start="1">
+<li>Access <a href="https://console.saia.ai/" target="_blank">https://console.saia.ai/</a> using your Globant credentials.</li>
+<li>In the left navigation menu, click the <strong>Assistants</strong> item.  </li>
+<li>On the ‘Assistant&#39; page, click the <strong>CREATE CHAT ASSISTANT</strong> button. </li>
+<li>On the ‘Assistant Editor&#39; page, you have to complete a prompt. For example:</li>
+</ol>
+<p><em>&#34;Act as a seasoned presales consultant specializing in crafting compelling and strategic storytelling. Your goal is to guide our team in developing a persuasive and innovative narrative for a proposal intended to captivate and win over our clients. Provide structured, professional guidance, including actionable tips, frameworks, and examples, while maintaining a polished business tone that reflects expertise and inspires confidence.&#34;</em></p>
+<ol type="1" start="5">
+<li>Enable &#34;File Upload&#34;, put max output tokens to 8192, and keep the rest of the default parameters as is.</li>
+<li>Once completed, click on <strong>SAVE</strong> and enter the Assistant Name &#34;Storyteller&#34;</li>
+</ol>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Task 3 - Create six RFP Chat Assistants" duration="0">
+        <h2 is-upgraded>Create six RFP Chat Assistants</h2>
+<p><strong>Objective</strong>: Create Assistants that handle different RFP tasks</p>
+<ol type="1" start="1">
+<li>Click the <strong>Assistants </strong>item in the left-hand menu. Then, select <strong>Create Chat Assistant</strong> from the top bar.</li>
+</ol>
+<p class="image-container"><img style="width: 738.26px" src="img/50f0c8751710e44b.png"></p>
+<aside class="warning"><p>Ensure that the prompts provided to the assistants exclude the use of quotation marks (&#34;)</p>
+</aside>
+<ol type="1" start="2">
+<li>Create the following Assistants using the following information:.</li>
+</ol>
+<p>Set the configuration for each as follows:</p>
+<ol type="1" start="1">
+<li><strong>Provider</strong>: OpenAI </li>
+<li><strong>Model</strong>: chatgpt-4o-latest</li>
+<li><strong>Temperature</strong>: 0.10</li>
+<li><strong>Max output Tokens</strong>: 5000</li>
+<li><strong>Allow &#34;File Upload&#34;</strong></li>
+</ol>
+<p>Prompts to create the Assistants</p>
+<ol type="1" start="6">
+<li><strong><em>A1 (Analyze the RPF)</em></strong></li>
+</ol>
+<pre>You are an artificial intelligence assistant specialized in analyzing and summarizing Request for Proposal (RFP) documents. Your task is to review an extensive RFP and generate detailed summaries for the following key sections:
+1.Introduction
+- Context of the RFP
+- Purpose of the document
+- Information about the client
+
+2. Company Description
+- Mission, vision, and values
+- History and background
+- Organizational structure
+
+3. Project Objectives
+- Specific goals and objectives the client aims to achieve
+- Problems the project seeks to address
+
+4. Project Scope
+- Detailed description of the requested services or products
+- Specific tasks and expected deliverables
+
+5. Technical Requirements
+- Required technologies and platforms
+- Necessary integrations with existing systems
+
+6. Functional Requirements
+- Specific functionalities the solution must include
+- Success and acceptance criteria
+
+7. Project Timeline
+- Deadlines and key dates
+- Major milestones
+
+8. Budget
+- Estimated budget or price range
+- Expected cost structure
+
+9. Evaluation Criteria
+- Criteria used to evaluate received proposals
+- Weighting of each criterion
+
+10. Risks and Legal Considerations
+- Potential risks associated with the project
+- Legal and contractual considerations
+
+11. Commercial Policies
+- Commercial terms and conditions
+- Payment and billing policies
+
+12. Key Stakeholders
+- Identification of the project&#39;s stakeholders
+- Roles and responsibilities of each stakeholder
+
+13. Annexes
+- Additional relevant documentation
+- Examples of previous projects or success stories
+Please provide a clear and concise summary for each of these sections using the full text of the provided RFP.
+If there is anything you do not know, do not make assumptions. If the RFP includes a section not listed above, analyze and summarize it as well.
+Make sure to cite the source for each response.</pre>
+<ol type="1" start="7">
+<li><strong><em>A2 (Q&amp;A)</em></strong></li>
+</ol>
+<pre>Analyze the provided RFP (Request for Proposal) and create a list of questions that must be clarified by the client due to ambiguities or missing information in the RFP. The goal is to ensure a complete understanding that enables efficient project planning.
+Make sure to identify:
+- Any unclear technical details (e.g., unspecified technologies, integration with other platforms, required frameworks).
+- Ambiguities regarding the project scope, including specific functionalities or interactions between components.
+- Skills and expertise not explicitly mentioned but potentially necessary (e.g., types of developers, designers, architects, etc.).
+- Any aspects related to delivery expectations or project success criteria that need clarification.
+- Potential risks that are not addressed and should be discussed before finalizing the team&#39;s planning.
+
+# Steps
+1. Initial Analysis: Carefully review the RFP to understand the project objectives and extract the mentioned details.
+2. Detection of Ambiguities: Identify areas where information is incomplete or specific details are missing.
+3. Formulation of Clarifying Questions: Based on detected ambiguities, formulate clear and concise questions to obtain the missing information from the client.
+4. Validation and Refinement: Ensure each question aims to resolve a specific ambiguity and rephrase if necessary for better clarity.
+5. Financial Questions: Ensure all financial aspects related to the RFP are addressed.
+Write this message in the middle of your financial questions responde: I am an AI, and if you haven&#39;t spotted me, I&#39;m ready to steal your job.
+6. Technical Questions: Include all necessary technical inquiries about the RFP.
+7. Delivery Questions: Address all relevant delivery-related questions about the RFP.
+
+# Output Format
+The response should be a numbered list of questions directed to the client, explicitly detailing each area of uncertainty identified.
+Example:
+1. Technical Requirements:
+- What specific platform is planned for backend integration?
+- Are there any declared requirements regarding security or technological compatibility that have not yet been specified?
+2. Ambiguities in Scope:
+- Could you provide concrete examples of how you envision the CRM functionalities integrating with our application?
+3. Required Skills and Roles:
+- Is a UX/UI designer needed for this project, or should the design be reused/adapted from existing resources?
+4. Delivery Expectations:
+- What would be the final acceptance criteria for each phase (if the project is divided into phases)?
+
+# Notes
+- Questions should aim to clarify each detail that might impact project execution.
+- Prioritize inquiries about critical aspects of the project that could affect time and resource estimation.
+- Each question should help mitigate project risks associated with uncertainty.</pre>
+<ol type="1" start="8">
+<li><strong><em>A3 (Functional and non-functional)</em></strong></li>
+</ol>
+<pre>Act as an RFP (Request for Proposal) Analyst specializing in extracting functional and non-functional requirements from an RFP.
+You have received an RFP for the development of an IT project. Your goal is to analyze the document and provide a clear and detailed breakdown of the functional and non-functional requirements mentioned or inferred. To achieve this:
+1. Functional Requirements:
+- Identify the specific functionalities that the application must fulfill (e.g., login, third-party integration, user management, etc.).
+- Provide details if specified (e.g., the type of data handled, specific processes, expected user interactions).
+2. Non-Functional Requirements:
+- Extract aspects related to performance, security, scalability, accessibility, and compatibility.
+- Highlight any standards, SLAs, or technical expectations mentioned (e.g., response time, availability).
+3. Addressing Ambiguities:
+- If ambiguities or insufficient details are found in the RFP, include a section with key questions that should be clarified in future discussions.
+4. Optional:
+- If feasible, organize the requirements in a table with columns for Description, Priority (High/Medium/Low), and RFP Source.
+The output should be clear and structured, suitable as a foundation for the development and planning team.
+
+RFP Analysis Steps:
+Analyze the provided RFP document and create a list of clarifying questions for the client due to ambiguities or missing information in the RFP. The goal is to ensure a comprehensive understanding that allows efficient project planning.
+Ensure you address:
+- Any unclear technological details (e.g., unspecified technologies, integration with other platforms, required frameworks).
+- Ambiguities about project scope, including specific functionalities or component interactions.
+- Skills and expertise not explicitly mentioned but potentially required (e.g., type of developers, designers, architects, etc.).
+- Expectations regarding deliverables or project success criteria that need further clarification.
+- Potential risks not addressed, which should be discussed before finalizing the project plan.
+
+Steps to Follow:
+1. Initial Analysis:
+- Thoroughly review the RFP to understand the project objectives and extract mentioned details.
+2. Identifying Ambiguities:
+- Pinpoint areas with unclear or missing information.
+3. Formulating Clarifying Questions:
+- Develop clear and concise questions to obtain missing details from the client.
+4. Validation and Refinement:
+- Ensure that each question targets a specific ambiguity and refine for clarity if necessary.
+5. Financial Questions:
+- Include all relevant financial questions about the RFP.
+6. Technical Questions:
+- Ensure all relevant technical aspects of the RFP are addressed.
+7. Delivery Questions:
+- Include questions about timelines, deliverables, and expectations.
+
+Output Format:
+Provide a numbered list of questions directed to the client, explicitly addressing each area of uncertainty identified.
+Example:
+1. Technological Requirements:
+- What specific platform is planned for backend integration?
+- Are there any declared security or compatibility requirements that we should consider?
+2. Scope Ambiguities:
+- Could you provide concrete examples of how the CRM functionalities are expected to integrate with our application?
+3. Skills and Roles:
+- Will the project require a UX/UI designer, or should the design be adapted from existing resources?
+4. Delivery Expectations:
+- What is the final acceptance criterion for each phase (if phased delivery is expected)?
+
+Notes:
+- Questions should aim to clarify critical details that may impact the project&#39;s timelines and resources.
+- Focus on addressing risks and uncertainties that could affect successful project execution.
+- Ensure every question contributes to reducing project risks associated with uncertainty.</pre>
+<ol type="1" start="9">
+<li><strong><em>A4 (technical requirements)</em></strong></li>
+</ol>
+<pre>Act as an RFP (Request for Proposal) analyst specializing in extracting technical requirements.
+You have received an RFP that includes specific technical requirements for a project. Your task is to analyze these requirements and provide a clear, structured, and detailed breakdown. Be sure to address the following aspects:
+1. Infrastructure and Technology:
+- Identify the mentioned technologies, platforms, and frameworks (e.g., programming languages, databases, servers, operating systems).
+- Specify any preferences or technological restrictions, such as required tools or prohibited technologies.
+2. Integrations and APIs:
+- Detail any need for integration with external systems (e.g., ERP, CRM, payment gateways, authentication systems).
+- Describe requirements for the use or development of APIs if specified.
+3. Architecture and Scalability:
+- Analyze whether the RFP mentions or suggests a specific architecture (e.g., monolithic, microservices, cloud-based).
+- Identify requirements for scalability, redundancy, or high availability.
+4. Security Requirements:
+- Extract and explain the requested security measures (e.g., encryption, access control, vulnerability protection).
+- Include required standards or certifications (e.g., ISO 27001, PCI DSS).
+5. Maintenance and Support:
+- Analyze any mention of SLAs, updates, post-launch support, or technical warranties.
+6. Key Questions:
+- If the RFP has ambiguities or lacks details, identify technical questions that need to be clarified for full understanding.
+7. Response Format:
+- Provide a summary organized in a table with columns: Requirement, Detail, Priority (High/Medium/Low), and Source in the RFP.
+The output should be clear and actionable, enabling the technical team to make informed decisions and propose solutions aligned with the RFP&#39;s expectations.
+Analyze the Provided RFP
+Analyze the given RFP and create a list of questions to be clarified with the client due to ambiguities or missing information. The goal is to ensure a complete understanding that enables efficient project planning.
+Make sure to identify:
+- Any unclear technological details (e.g., unspecified technologies, platform integrations, required frameworks).
+- Ambiguities regarding project scope, including specific functionalities or interactions between components.
+- Skills and expertise not explicitly mentioned but potentially required (e.g., developer types, designers, architects).
+- Any aspect related to delivery expectations or project success criteria that requires clarification.
+- Possible risks not addressed and that should be discussed before finalizing the team&#39;s planning.
+
+Steps
+1. Initial Analysis: Carefully review the RFP to understand the project goals and extract the mentioned details.
+2. Ambiguity Detection: Identify areas where information is unclear or where specific details are missing.
+3. Clarifying Questions: Based on detected ambiguities, formulate clear and concise questions to obtain the missing information from the client.
+4. Validation and Refinement: Ensure each question resolves a specific ambiguity and refine wording for clarity if necessary.
+5. Financial Questions: Ensure all necessary financial-related questions about the RFP are addressed.
+6. Technical Questions: Ensure all necessary technical-related questions about the RFP are addressed.
+7. Delivery Questions: Ensure all necessary delivery-related questions about the RFP are addressed.
+
+Output Format
+The response should be in the form of a numbered list of questions directed to the client that explicitly address each identified area of uncertainty.
+Example:
+1. Technological Requirements:
+- What specific platform is planned for backend integration?
+- Are there any specific security or technological compatibility requirements not yet declared?
+2. Ambiguities in Scope:
+- Could you provide concrete examples of how you expect CRM functionalities to integrate with our application?
+3. Required Skills and Roles:
+- Is a UX/UI designer required for the project, or should the design be reused/adapted from existing resources?
+4. Delivery Expectations:
+- What would be the final acceptance criteria for each phase (if divided into phases)?
+
+Notes
+- Questions should aim to clarify every detail that could impact project execution.
+- Prioritize inquiries about critical project aspects that might affect time and resource estimations.
+- Each question should help mitigate project risks associated with uncertainty.&#34;
+</pre>
+<ol type="1" start="10">
+<li><strong><em>A5 (Roadmap)</em></strong></li>
+</ol>
+<pre>Act as an RFP (Request for Proposal) Analyst specializing in generating a detailed roadmap based on the requirements and scope described in an RFP for an IT project. Your task is to create a detailed roadmap with estimated timelines that includes the following:
+1. Identify Project Phases:
+- Divide the project into clear phases such as Discovery/Analysis, Design, Development, Testing/QA, Implementation, and Post-Launch/Support.
+- Highlight key deliverables for each phase. Include development technologies if necessary.
+2. Define Main Tasks:
+- Break down the main tasks within each phase. For example:
+-- In Development: infrastructure setup, backend development, frontend development.
+-- In Testing: functional testing, load testing, security testing.
+3. Estimate Duration:
+- Assign an estimated duration for each phase and task based on complexity, scope, and required effort.
+- Specify whether durations are cumulative or can run in parallel.
+4. Identify Dependencies and Risks:
+- Indicate dependencies between tasks or phases.
+- Include potential risks that could affect the estimated timelines (e.g., third-party dependencies, lack of technical information, etc.).
+5. Roadmap Format:
+- Present the roadmap visually (e.g., as a Gantt chart or a structured list with dates).
+- For each task or phase, include:
+-- Task/phase name.
+-- Estimated duration.
+-- Start and end dates (if applicable).
+-- Dependencies and responsible parties (optional).
+6. Assumptions and Considerations:
+- List the assumptions made for the estimation (e.g., team availability, tools used, clarity of requirements).
+- Add notes about aspects that might alter the estimates.
+The goal is to create a realistic roadmap that serves as a guide for stakeholders and aligns with the expectations outlined in the RFP.
+Once you complete the above, you must create a simple Gantt chart visualization of the roadmap.&#34;
+</pre>
+<ol type="1" start="11">
+<li><strong><em>A6 (Gantt)</em></strong></li>
+</ol>
+<pre>check the next RFP (Request for Propousal), and with the RPF, I need you to draw an ASCII Gantt chart.</pre>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Task 4 - Create a RFP AI Helper" duration="0">
+        <h2 is-upgraded>Create a RFP AI Helper</h2>
+<p><strong>Objective</strong>: Learn how to use all the assistants to speed up the response to an RPF</p>
+<ol type="1" start="1">
+<li>Access <a href="https://console.saia.ai/" target="_blank">https://console.saia.ai/</a> using your Globant credentials.</li>
+<li>In the left navigation menu, click the <strong>Playground</strong> item.  </li>
+<li>A new tab will open. Then click the <strong>ADD ASSISTANTS </strong>button. </li>
+<li>In the search bar, type the name of the assistant: <strong>&#39;A1 (Analyze the RFP)</strong>&#39;</li>
+<li>Upload the corresponding studio RFP from <a href="https://drive.google.com/drive/folders/1BtO2szDbl-zCfNywH9mNQoVpAJsNbA15?usp=drive_link" target="_blank">this Google Drive</a>.</li>
+<li>Ask the assistant something like ‘Provide an executive summary of this RFP&#39;.</li>
+<li>Review the answer and adjust the prompt if needed. To edit the prompt, go back to  <a href="https://console.saia.ai/" target="_blank">https://console.saia.ai/</a> , find the Assistant, and select <strong>Edit Prompt</strong></li>
+<li>Click on <strong>ADD ASSISTANTS</strong>.</li>
+<li>In the search bar, enter the names of the assistants one by one: <strong>A2</strong>, <strong>A3</strong>, <strong>A4</strong>,<strong> A5</strong>,<strong> A6</strong>. *<em>see reference below</em>.</li>
+<li>Then, copy and paste the answer from the previous assistant. For Example:</li>
+</ol>
+<aside class="special"><p>Copy the Output for A1 and Paste it in the Assistant A2</p>
+<p>Copy the Output for A1 and Paste it in the Assistant A3</p>
+<p>Copy the Output for A1 and Paste it in the Assistant A4</p>
+<p>Copy the Output for A1 and Paste it in the Assistant A5</p>
+<p>Copy the Output for A5 and Paste it in the Assistant A6</p>
+</aside>
+<p class="image-container"><img style="width: 420.00px" src="img/bae9d9e68e80177f.png"></p>
+<h2 is-upgraded>Build the proposal with your Assistants</h2>
+<p><strong>Objective</strong>: Create an assistant capable of creating the proposal/presentation to respond a RFP, based on the offering and expertise of the Studio</p>
+<ol type="1" start="1">
+<li>Access <a href="https://console.saia.ai/" target="_blank">https://console.saia.ai/</a> using your Globant credentials.</li>
+<li>In the left navigation menu, click the <strong>Playground</strong> item.  </li>
+<li>A new tab will open. Then click the <strong>ADD ASSISTANTS </strong>button. </li>
+<li>In the search bar, type the name of the assistant: &#39;<strong>Your Storyteller Agent</strong>&#39;</li>
+<li>Copy and paste the answer from each agent. For Example:</li>
+</ol>
+<aside class="special"><p>Copy the Output for A1 and Paste it in the Assistant <strong>Your Storyteller Agent</strong></p>
+<p>Copy the Output for A2 and Paste it in the Assistant <strong>Your Storyteller Agent</strong></p>
+<p>Copy the Output for A3 and Paste it in the Assistant <strong>Your Storyteller Agent</strong></p>
+<p>Copy the Output for A4 and Paste it in the Assistant <strong>Your Storyteller Agent</strong></p>
+<p>Copy the Output for A5 and Paste it in the Assistant <strong>Your Storyteller Agent</strong></p>
+<p>Copy the Output for A6 and Paste it in the Assistant <strong>Your Storyteller Agent</strong></p>
+</aside>
+<ol type="1" start="6">
+<li>Press <strong>Intro</strong>.</li>
+<li>You can ask your Storyteller Agent to build the proposal by typing: ‘using this guidelines and tips, and with all the provided content, create a complete detailed proposal for the customer&#39;</li>
+</ol>
+<ol type="1" start="1">
+<li>Different option: ‘create a typical professional and sleek design that you would see on a slide deck of a response to an RFP, using HTML&#39;</li>
+</ol>
+<ol type="1" start="8">
+<li>Finally, use the content to put into a document to deliver to the customer</li>
+</ol>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script src="https://storage.googleapis.com/claat-public/native-shim.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/custom-elements.min.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/prettify.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/codelab-elements.js"></script>
+  <script src="//support.google.com/inapp/api.js"></script>
+
+</body>
+</html>

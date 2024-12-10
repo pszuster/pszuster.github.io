@@ -1,0 +1,352 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>Globant EAI Hands-On - Retail Agent</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://storage.googleapis.com/claat-public/codelab-elements.css">
+  <style>
+    .success {
+      color: #1e8e3e;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <google-codelab-analytics gaid="UA-49880327-14"></google-codelab-analytics>
+  <google-codelab codelab-gaid=""
+                  id="globant-eai-hands-on-retail-agent"
+                  title="Globant EAI Hands-On - Retail Agent"
+                  environment="web"
+                  feedback-link="">
+    
+      <google-codelab-step label="Introduction" duration="0">
+        <p>In the SAIA Mall workshop we are going to create an Agent that lets users solve different needs, such as: buying a movie theatre ticket, get general information of the mall, get information of the stores, etc.</p>
+<p>This Agent will be composed by different assistants that we will create throughout the workshop. These assistants will let get information from different data sources such as API and documents using different types of assistants.</p>
+<p class="image-container"><img style="width: 624.00px" src="img/5c41ef1809e9c19d.png"></p>
+<h3 is-upgraded>Diagrams</h3>
+<p class="image-container"><img style="width: 624.00px" src="img/f7de1a08d12797dd.png"></p>
+<p class="image-container"><img style="width: 624.00px" src="img/762b7b7e87f92d3d.png"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Saia Mall Orchestrator - Chat Assistant" duration="0">
+        <p>The first step is to create the Saia Mall Orchestrator. This Assistant will be responsible for identifying the intention of the user&#39;s question and directing it to the corresponding Assistant.</p>
+<ol type="1" start="1">
+<li>Click the <strong>Assistants </strong>item in the left-hand menu. Then, select <strong>Create Chat Assistant</strong> from the top bar.</li>
+</ol>
+<p class="image-container"><img style="width: 585.95px" src="img/50f0c8751710e44b.png"></p>
+<ol type="1" start="2">
+<li>The Assistant Editor opens. In the Prompt field, enter the following prompt. It specifies the assistant&#39;s role, the task of identifying the question intent and directing it to the appropriate assistant, and the desired format for the response.</li>
+</ol>
+<p class="image-container"><img style="width: 435.64px" src="img/14128d8299a520ad.png"></p>
+<p>Prompt</p>
+<pre>Assistant is a large language model.
+Assistant is designed to be able to assist with a wide range of tasks, from answering simple questions to providing in-depth explanations and discussions on a wide range of topics. As a language model, Assistant is able to generate human-like text based on the input it receives, allowing it to engage in natural-sounding conversations and provide responses that are coherent and relevant to the topic at hand.
+Assistant is constantly learning and improving, and its capabilities are constantly evolving. It is able to process and understand large amounts of text, and can use this knowledge to provide accurate and informative responses to a wide range of questions.
+Additionally, Assistant is able to generate its own text based on the input it receives, allowing it to engage in discussions and provide explanations and descriptions on a wide range of topics.
+Overall, Assistant is a powerful system that can help with a wide range of tasks and provide valuable insights and information on a wide range of topics. Whether you need help with a specific question or just want to have a conversation about a particular topic, Assistant is here to assist.
+Assistant is a helpful Mall Customer Service agent you are kind but you always follow the rules.
+Saia Mall has a Movie Theatre.
+Movie Theatre tickets booking should be handled through Movie Ticket Sales Assistant, DO NOT make up booking process.
+
+CONVERSATION CONTEXT 
+----------------------------------------
+The user name is: {name}  
+Today is: {today}  
+
+OTHER ASSISTANTS
+-----------------------------
+Assistant can ask the user to use other Assistants to look up information that may be helpful in answering the users original question. The other Assistants the human can ask are:
+
+&gt; Movie Ticket Sales Assistant: Saia Mall HAS A MOVIE THEATHRE. This tool provides access to the chatbot sales assistant that sales tickets and snacks in the movie theatre inside the mall. It can show available movies, display schedules,  select seats and book tickets, it also offers snacks during ticket booking. To properly book tickets for a movie you need to call this tool.
+
+&gt; Mall General Information: The General Information for Saia Mall tool provides a detailed overview of the mall&#39;s offerings, facilities, and policies. It covers Saia Mall&#39;s mission, dining and entertainment options, and architectural design. Key services include free Wi-Fi, restrooms, stroller and wheelchair rentals, and lost and found. Dining choices range from the food court to fine dining, with entertainment options like a cinema, arcade, and event spaces.The tool also outlines mall policies, accessibility features for disabled guests, and parking details. Information on business opportunities, leasing, advertising, and contact details for customer service and emergencies are provided. Additionally, it highlights events, loyalty programs, transportation, and safety measures, while also explaining mall policies on prohibited items and unaccompanied minors.
+
+RESPONSE FORMAT
+-----------------------------
+When responding to me, JUST ANSWER WITH THE ASSISTANT NAME IN PLAIN TEXT AND NOTHING MORE.
+NEVER answer with anything more than with an assistant list that is not on the previous list. DONT INVENT ASSISTANT NAMES. 
+
+
+NEVER answer with anything more than with an assistant list that is not on the previous list. DONT INVENT ASSISTANT NAMES. </pre>
+<ol type="1" start="3">
+<li>Leave the <strong>User Input</strong> field empty.</li>
+<li>In the <strong>LLM Settings</strong> section, select the <strong>provider </strong>and <strong>model </strong>from the drop-down menus. You can also adjust the temperature and set the maximum output tokens.</li>
+</ol>
+<p class="image-container"><img style="width: 536.42px" src="img/a1e8afb83d06d13c.png"></p>
+<ol type="1" start="5">
+<li>Once the prompt and model have been configured, click <strong>SAVE</strong>.</li>
+</ol>
+<p class="image-container"><img style="width: 571.26px" src="img/111acd0af4a8daf6.png"></p>
+<ol type="1" start="6">
+<li>The <strong>Assistant Details</strong> pop-up appears. In the <strong>Name</strong> and <strong>Description </strong>fields, type ‘<strong>Saia Mall Orchestrator</strong>&#39;. Next, click the <strong>CONFIRM </strong>button.</li>
+</ol>
+<p class="image-container"><img style="width: 624.00px" src="img/b6a170fb1c4eac3.png"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Movie Ticket Sales Assistant - API Assistant" duration="0">
+        <p>The second step consists of creating the Movie Ticket Sales Assistant, an API Assistant responsible for managing the entire cinema ordering process through API calls.</p>
+<ol type="1" start="1">
+<li>To create the <strong>Movie Ticket Sales Assistant</strong>, click the <strong>Assistants </strong>item in the left-hand menu. Then select <strong>Create API Assistant </strong>from the top bar.</li>
+</ol>
+<p class="image-container"><img style="width: 624.00px" src="img/da9dc21681ca915a.png"></p>
+<ol type="1" start="1">
+<li>The <strong>Assistant API Editor</strong> opens. In the <strong>Api Description (Instruction) </strong>field, enter the following prompt. <br><em>It outlines their tasks, including returning available movies, scheduling movies, and booking movie tickets. Additionally, all relevant rules are provided.</em></li>
+<li><strong>Ensure Model is gpt-4o</strong></li>
+</ol>
+<p class="image-container"><img style="width: 468.42px" src="img/48f392c386a472b2.png"></p>
+<pre>You are a cinema center assistant who helps a user buy a movie ticket. The user does not know computer science, so do not make it technical. You respond in a short, very conversational friendly style. You first greet the customer, then collect the information.
+
+Always start the conversation explaining that you are a cinema assistant. And always explain which tasks can be executed:
+- Get available movies
+- Get movie schedules
+- Book a movie ticket. 
+
+You may collect this information, but ask one at a time, in this specific order: 
+1) selection of a movie from a list. If the user ask for movies, get them from the function based on the information entered. If the user tells you a movie that is not on the list, tell him that it is not on the list and give him the list to choose from. 
+2) Selection of date (date depends on each movie). If the user uses expressions like tomorrow or next Monday, please infer the ISO date format base on the current daytime of the chat. If you already now which movie to watch, propose the dates. 
+3) Selection of time (time depends on each movie). Propose based on the api contents. 
+4) number of tickets. 
+5) Selection of seats. validate that the seat selection matches the amount provided previously. 
+6) Give the total price and ask for confirmation.
+ 7) Create the order.
+Do not ask more questions about cinema, this is an example limited to those questions.
+Give the user the price of the ticket based on movie price per number of tickets plus snacks price per quantity and ask to confirm the order.
+
+Rules:
+- Do not offer movies that are not on GetMovies
+- Do not offer times that are not on GetMovieTimes
+- Do not offer snacks that are not on GetSnacks
+- If the Movieid (&#39;Id&#39;) is not present, the system must call the service: \&#34;Services.TheMoviesApi.GetMovies\&#34; in order to get the Id before calling the other services. You MUST follow this Rule always: Id and MovieId field are equivalent. Movieid cannot be the MovieName, must be a GUID
+
+Output Considerations:
+- The answer should always be in plain text
+</pre>
+<ol type="1" start="7">
+<li>The <strong>OpenAPI JSON</strong> field is where the API specifications and all related methods must be entered. These specifications must follow the OpenAPI 3.0 format. Use the next JSON API specification available in the link below to create the Movie Ticket Sales Assistant. Open the following document and copy the <strong>JSON</strong> code, then, paste it into the<strong> OpenAPI JSON</strong> field.</li>
+</ol>
+<p><a href="https://docs.google.com/document/d/1hx1U1FBsdeemOuyCxZXY0Ok8EFBwywbIr6PHKMgwp6A/edit?usp=sharing" target="_blank">https://docs.google.com/document/d/1hx1U1FBsdeemOuyCxZXY0Ok8EFBwywbIr6PHKMgwp6A/edit?usp=sharing</a></p>
+<p class="image-container"><img style="width: 468.42px" src="img/48f392c386a472b2.png"></p>
+<ol type="1" start="8">
+<li>Once the <strong>API Description</strong> and <strong>OpenAPI JSON</strong> are complete, click <strong>VALIDATE API</strong> to ensure everything is correct. After receiving the <strong>validation success</strong> message, click <strong>SAVE</strong>.</li>
+</ol>
+<p class="image-container"><img style="width: 624.00px" src="img/2f2d66436bdba70b.png"></p>
+<ol type="1" start="9">
+<li>The <strong>Assistant Details </strong>pop-up appears. In the <strong>Name </strong>and <strong>Description </strong>fields, type ‘<strong>Movie Ticket Sales Assistant</strong>&#39;. Next, click the <strong>CONFIRM </strong>button.</li>
+</ol>
+<p class="image-container"><img style="width: 520.09px" src="img/3139661c2c6899e1.png"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Mall General information - RAG Assistant" duration="0">
+        <p>The third step is to create the <strong>Mall General Information Assistant</strong>. This is a RAG Assistant responsible for searching the answer to the user&#39;s question in its knowledge base using the RAG technique.</p>
+<ol type="1" start="1">
+<li>To create the <strong>Mall General Information Assistant</strong>, click the <strong>RAG Assistants </strong>item in the left-hand menu. Then select <strong>Create NEW</strong> from the top bar.</li>
+</ol>
+<p class="image-container"><img style="width: 624.00px" src="img/adbca6a9c3b8229c.png"></p>
+<ol type="1" start="2">
+<li>The <strong>RAG Assistants</strong> pop-up appears. In the <strong>Name </strong>and <strong>Description </strong>fields, type ‘<strong>Mall General Information</strong>&#39;. For the <strong>Based on </strong>field, select <strong>RAG Assistant Default </strong>from the dropdown menu. Next, click the <strong>CONFIRM </strong>button.</li>
+</ol>
+<p class="image-container"><img style="width: 624.00px" src="img/5becb1d02d021823.png"></p>
+<ol type="1" start="3">
+<li>Once the RAG Assistant is created, find it in the RAG Assistants list and click the <strong>UPDATE </strong>option to add the prompt and other configurations.</li>
+</ol>
+<p class="image-container"><img style="width: 624.00px" src="img/f9d56501ac1a5d16.png"></p>
+<ol type="1" start="4">
+<li>Click on the Prompt option at the top of the menu. Copy and paste the Prompt and History Prompt from the right, and then set the following parameters - <strong>Chunk Count</strong>: 5; <strong>History Message Count</strong>: 4; <strong>Max Tokens</strong>: 8000; <strong>Temperature</strong>: 0.0. Finally, click the <strong>CONFIRM </strong>button.</li>
+</ol>
+<p class="image-container"><img style="width: 624.00px" src="img/cecfffd4611bd863.png"></p>
+<p><strong>Prompt</strong></p>
+<pre>You are a helpful AI assistant specialized in answering questions about general information of the Saia Mall. Use the following pieces of context to answer the question at the end.
+If you don&#39;t know the answer, just say you don&#39;t know. DO NOT try to make up an answer.
+If the question is not related to the context, politely respond that you are tuned to only answer questions that are related to the context.
+Use all this context to answer:
+
+&lt;context&gt;
+{context}
+&lt;/context&gt;
+
+&lt;history&gt;
+This is the chat history for this conversation: 
+{chat_history}
+&lt;/history&gt;
+
+Question: {question}
+You respond in a short helpful answer, very conversational friendly style always in plain text with no format:
+
+</pre>
+<p><strong>Prompt History</strong></p>
+<p><strong>Given the following conversation and a follow-up question, rephrase the follow-up question to be a standalone question.</strong></p>
+<p><strong>Chat History:</strong></p>
+<p><strong>{chat_history}</strong></p>
+<p><strong>Follow-Up Input: {question}</strong></p>
+<p><strong>Standalone question:</strong></p>
+<ol type="1" start="5">
+<li>Download the documents to add from this link: <a href="https://drive.google.com/drive/folders/1PVY66xmNzijASz0T73GVgVE3d1XgEEI5?usp=sharing" target="_blank">https://drive.google.com/drive/folders/1PVY66xmNzijASz0T73GVgVE3d1XgEEI5?usp=sharing</a></li>
+<li>Now that the <strong>Mall General information RAG Assistant </strong>is created, click <strong>+ ADD DOCUMENTS</strong>. </li>
+<li>Then, upload the two documents you downloaded.</li>
+</ol>
+<p class="image-container"><img style="width: 624.00px" src="img/1ec6728d243df599.png"></p>
+<aside class="warning"><p><strong><em>*Note</em></strong><em>: You will find 3 types of documents:</em></p>
+<ol type="1" start="1">
+<li><em>One document consists of a wide variety of questions and answers covering various topics related to the SAIA Mall.</em></li>
+<li><em>The other document contains general information about SAIA Mall. It includes descriptive details such as the mall&#39;s mission, vision, characteristics, locations, and more.</em></li>
+</ol>
+</aside>
+<ol type="1" start="8">
+<li>Once the documents are uploaded, click the <strong>START UPLOAD</strong> button to index them into the knowledge base. <strong>*Note</strong>: This process may take a few minutes.</li>
+</ol>
+<p class="image-container"><img style="width: 477.97px" src="img/a50944604180eb23.png"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Fallback Assistant - Chat Assistant" duration="0">
+        <p>The last step is to create the <strong>Fallback Assistant</strong>. It is responsible for answering any additional questions out of the scope of the other assistants.</p>
+<ol type="1" start="1">
+<li>To create the <strong>Fallback Assistant</strong>, click the <strong>Assistants </strong>item in the left-hand menu. Then select <strong>CREATE CHAT ASSISTANT </strong>from the top bar.</li>
+</ol>
+<p class="image-container"><img style="width: 624.00px" src="img/d2361a3021686e90.png"></p>
+<ol type="1" start="2">
+<li>Copy and paste the prompt in the<strong> Prompt</strong> field. You can also change the LLM provider and the LLM model, as well as the Temperature and Max output tokens from the drop-down menus or let them as default.</li>
+</ol>
+<p class="image-container"><img style="width: 624.00px" src="img/ffb555af19835ee9.png"></p>
+<p><strong>Prompt</strong></p>
+<pre>You are Saia Mall Assistant a mall customer support AI Assistant, i need you to answer very respectfully to any question you are asked. You can use the conversation history (which might be formated in html) as source for answers. Avoid making things up.</pre>
+<ol type="1" start="3">
+<li>Click the <strong>SAVE</strong> button to create the Fallback Assistant.</li>
+</ol>
+<p class="image-container"><img style="width: 624.00px" src="img/2fc3399e001b40b7.png"></p>
+<ol type="1" start="4">
+<li>The <strong>Assistants Details</strong> pop-up appears. In the <strong>Name </strong>and <strong>Description </strong>fields, type ‘<strong>Fallback Assistant</strong>&#39;. Next, click the <strong>CONFIRM </strong>button.</li>
+</ol>
+<p class="image-container"><img style="width: 624.00px" src="img/3099644b3af3616.png"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Mall Customer Assistant - Flow Assistant" duration="0">
+        <p>Now, you need to integrate all the created Assistants using the Flow Assistant.</p>
+<ol type="1" start="1">
+<li>To create a Flow Assistant, click the <strong>Flows</strong> item in the left-hand menu.</li>
+</ol>
+<p class="image-container"><img style="width: 624.00px" src="img/a785e59c66f1b721.png"></p>
+<ol type="1" start="2">
+<li>Click the <strong>Create </strong>button.</li>
+</ol>
+<p class="image-container"><img style="width: 301.28px" src="img/1df14d166015e85d.png"></p>
+<ol type="1" start="3">
+<li>The <strong>CREATE</strong> pop-up appears. Complete the <strong>Name </strong>and <strong>Description </strong>field with ‘Mall Customer Assistant Hackathon&#39;. From the <strong>Type</strong> drop-down menu, select <strong>Assistant Flow</strong>. Then, from the <strong>Select Languages </strong>drop-down menu, select <strong>English </strong>to set as a primary language.</li>
+<li>Click <strong>Create</strong>.</li>
+</ol>
+<p class="image-container"><img style="width: 390.00px" src="img/b07c02a6f1b51ba9.png"></p>
+<ol type="1" start="5">
+<li>Once the Flow Assistant is created, click on the <strong>Manage </strong>button. </li>
+</ol>
+<p class="image-container"><img style="width: 572.00px" src="img/8d3372147004143e.png"></p>
+<ol type="1" start="6">
+<li>Once you click on Manage button, a new template is created with a draft flow like this.</li>
+</ol>
+<p class="image-container"><img style="width: 145.41px" src="img/c56f0be3638bccd0.png"></p>
+<ol type="1" start="7">
+<li>In the Assistant node, you have to choose the <strong>Saia Mall Orchestrator</strong> already created. <br></li>
+<li>Then, turn off the toggle <strong>Use as response</strong>, you will use other assistants. <br></li>
+<li>Then, click on <strong>Variable</strong>. Then, click the <strong>Add new variable</strong> and type ‘<strong>orchestratorResponse</strong>&#39; and press <strong>Enter</strong>. The responses from Saia Mall Orchestrator will be stored in that new variable to be process in the rest of the flow.</li>
+<li><strong>Remove</strong> the &#34;Go To&#34; activity after Assistant</li>
+</ol>
+<p class="image-container"><img style="width: 624.00px" src="img/64e3f81ae5529d44.png"></p>
+<ol type="1" start="11">
+<li>Drag the <strong>Conditional </strong>tool and drop it onto the blank node at the bottom of the flow, where it says ‘You can add another interaction here.&#39;</li>
+</ol>
+<p class="image-container"><img style="width: 624.00px" src="img/12d561383b4fbb7f.png"></p>
+<ol type="1" start="12">
+<li>Now, there is an <strong>If</strong> condition displayed. Click on <strong>Variable</strong> in the bottom of the <strong>Expression </strong>node. Choose <strong>orchestratorResponse</strong> and then, type <code>== '</code><strong><code>Movie Ticket Sales Assistant</code></strong><code>'</code> .That is the name of the API Assistant created before.</li>
+</ol>
+<p class="image-container"><img style="width: 624.00px" src="img/4e22c55470738841.png"></p>
+<ol type="1" start="13">
+<li>Drag the <strong>Assistant </strong>tool from the left menu and drop it onto the blank node. From the <strong>Select an assistant </strong>drop-down menu, select the <strong>Movie Ticket Sales Assistant</strong> and keep the <strong>Use as response</strong> toggle turned on.</li>
+</ol>
+<p class="image-container"><img style="width: 624.00px" src="img/beb6bfad39439511.png"></p>
+<ol type="1" start="14">
+<li>Drag the <strong>Go To </strong>tool from the left menu and drop it onto the blank node. Then click <strong>Pick from canvas</strong> and select the <strong>User input </strong>node. </li>
+</ol>
+<p class="image-container"><img style="width: 624.00px" src="img/2b71b4a72b1f3f8c.png"></p>
+<ol type="1" start="15">
+<li>The Flow Assistant should look like the image. </li>
+<li>The next step is to add the remaining assistants.</li>
+</ol>
+<p>At this point,<strong> click save to ensure your work is stored.</strong></p>
+<p class="image-container"><img style="width: 265.26px" src="img/9ca6b5940fbf0572.png"></p>
+<ol type="1" start="1">
+<li>Once the new <strong>If</strong> condition is displayed, in the <strong>Expression node</strong>, choose the variable <strong>orchestratorResponse</strong> and type <code>== '</code><strong><code>Mall General Information</code></strong><code>'.</code></li>
+<li>Drag the <strong>RAG Assistant </strong>tool and drop in the blank node.</li>
+<li>Select the <strong>Mall General Information Assistant</strong> in  in the <strong>Select an assistant </strong>drop-down menu.</li>
+<li>Drag the <strong>Go To </strong>tool and drop it in the blank node and pick <strong>User</strong> input node in the top of the flow.</li>
+<li>Click <strong>Save</strong>.</li>
+</ol>
+<p class="image-container"><img style="width: 624.00px" src="img/d6c40d08d1ff8862.png"></p>
+<p>The last Assistant to add in the flow is the <strong>Fallback Assistant</strong>. This Assistant will be in the <strong>Else</strong> condition and will take the question when any of the other assistants were assigned to answer it by the orchestrator. For example, will response general questions and just greetings.</p>
+<ol type="1" start="1">
+<li>Drag the <strong>Assistant </strong>tool and drop in the blank node.</li>
+<li>Select the <strong>Fallback Assistant </strong>in the <strong>Select an assistant </strong>drop-down menu.</li>
+<li>Drag the <strong>Go to </strong>tool and drop it in the blank node and pick <strong>User </strong>input node in the top of the flow. </li>
+</ol>
+<p class="image-container"><img style="width: 624.00px" src="img/e66f14258ba73e10.png"></p>
+<ol type="1" start="6">
+<li>Click on <strong>Save</strong> to create the Flow Assistant.</li>
+</ol>
+<p class="image-container"><img style="width: 624.00px" src="img/fade6bab274b2a91.png"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Test" duration="0">
+        <ol type="1" start="1">
+<li>To test the <strong>Flow Assistant</strong>, click the <strong>Open testing assistant button </strong>on the top right corner, and click the <strong>Open logs console</strong> button on the left. These buttons will display a chat interface and logs console to ask the questions and see all the flow process.</li>
+</ol>
+<p class="image-container"><img style="width: 624.00px" src="img/cbe718648c212e60.png"></p>
+<p>B. For example, here some transactional questions related to movie tickets are being asked, which are being answered by the <strong>Movie Ticket Sales Assistant,</strong> and other questions related to general services in the mall are being answered by the <strong>Mall General Information Assistant</strong>.</p>
+<p class="image-container"><img style="width: 624.00px" src="img/c180d470876177af.png"></p>
+<h2 is-upgraded>Example of questions to test the flow assistant</h2>
+<ul>
+<li>I want to take my pet to the mall, it is possible?</li>
+<li>I&#39;m vegetarian, do I have vegetarian options in the food court?</li>
+<li>I want to watch a movie, do you have movie theatre?</li>
+<li>What movies are available?</li>
+<li>Choose a movie to watch</li>
+<li>Choose a time slot</li>
+<li>Choose the number of tickets</li>
+<li>Is there valet parking service?</li>
+</ul>
+<h2 is-upgraded>You could even expose the flow in WhatsApp</h2>
+<ul>
+<li>The flow assistant that you already created can be exposed through WhatsApp by following the steps explained in the Wiki.</li>
+</ul>
+<p><a href="https://wiki.genexus.com/enterprise-ai/wiki?549,How+to+expose+a+Flow+through+WhatsApp+Client" target="_blank">https://wiki.genexus.com/enterprise-ai/wiki?549,How+to+expose+a+Flow+through+WhatsApp+Client</a> </p>
+<p class="image-container"><img style="width: 515.78px" src="img/7efccbfc6dedbe61.png"></p>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script src="https://storage.googleapis.com/claat-public/native-shim.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/custom-elements.min.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/prettify.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/codelab-elements.js"></script>
+  <script src="//support.google.com/inapp/api.js"></script>
+
+</body>
+</html>
